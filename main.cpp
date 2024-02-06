@@ -2,8 +2,11 @@
 #include <QWebEngineView>
 #include <QSplitter>
 #include <QUrl>
-#include "mainwindow.h"
-#include "webengineviewwithnavigationsignals.h"
+#include <QWebEngineProfile>
+
+#include "include/mainwindow.h"
+#include "include/constants.h"
+#include "include/webengineviewwithnavigationsignals.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,9 +14,13 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow;
 
+    QWebEngineProfile *webProfile = new QWebEngineProfile("RemitProfile", nullptr);
+    webProfile->setPersistentStoragePath(Constants::dataPath() + "webProfile");
+    webProfile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
+
     auto *splitter = new QSplitter();
-    auto *leftView = new WebEngineViewWithNavigationSignals();
-    auto *rightView = new WebEngineViewWithNavigationSignals();
+    auto *leftView = new WebEngineViewWithNavigationSignals(webProfile);
+    auto *rightView = new WebEngineViewWithNavigationSignals(webProfile);
 
     splitter->addWidget(leftView);
     splitter->addWidget(rightView);
