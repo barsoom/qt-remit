@@ -13,25 +13,23 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     MainWindow mainWindow;
+    QSplitter splitter;
 
-    QWebEngineProfile *webProfile = new QWebEngineProfile("RemitProfile", nullptr);
-    webProfile->setPersistentStoragePath(Constants::dataPath() + "webProfile");
-    webProfile->setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
+    QWebEngineProfile webProfile("RemitProfile", nullptr);
+    webProfile.setPersistentStoragePath(Constants::dataPath() + "webProfile");
+    webProfile.setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
 
-    auto *splitter = new QSplitter();
-    auto *leftView = new WebEngineViewWithNavigationSignals(webProfile);
-    auto *rightView = new WebEngineViewWithNavigationSignals(webProfile);
+    WebEngineViewWithNavigationSignals leftView(&webProfile);
+    WebEngineViewWithNavigationSignals rightView(&webProfile);
 
-    splitter->addWidget(leftView);
-    splitter->addWidget(rightView);
+    splitter.addWidget(&leftView);
+    splitter.addWidget(&rightView);
 
-    leftView->setUrl(QUrl("https://example.com"));
-    rightView->setUrl(QUrl("https://github.com"));
+    leftView.setUrl(QUrl("https://example.com"));
+    rightView.setUrl(QUrl("https://github.com"));
 
-    splitter->setWindowTitle("Remit");
-
-    mainWindow.setCentralWidget(splitter);
-
+    mainWindow.setWindowTitle("Remit");
+    mainWindow.setCentralWidget(&splitter);
     mainWindow.show();
 
     return a.exec();
