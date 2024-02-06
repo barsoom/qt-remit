@@ -13,11 +13,13 @@ SOURCES += \
     main.cpp \
     src/constants.cpp \
     src/mainwindow.cpp \
+    src/settings.cpp \
     src/webengineviewwithnavigationsignals.cpp
 
 HEADERS += \
     include/constants.h \
     include/mainwindow.h \
+    include/settings.h \
     include/webengineviewwithnavigationsignals.h
 
 # Default rules for deployment.

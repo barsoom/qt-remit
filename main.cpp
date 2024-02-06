@@ -6,6 +6,7 @@
 
 #include "include/mainwindow.h"
 #include "include/constants.h"
+#include "include/settings.h"
 #include "include/webengineviewwithnavigationsignals.h"
 
 int main(int argc, char *argv[])
@@ -25,7 +26,8 @@ int main(int argc, char *argv[])
     splitter.addWidget(&leftView);
     splitter.addWidget(&rightView);
 
-    leftView.setUrl(QUrl("https://example.com"));
+    QUrl leftUrl(Settings::remitBaseUrl() + "?auth_key=" + Settings::remitAuthToken());
+    leftView.setUrl(leftUrl);
     rightView.setUrl(QUrl("https://github.com"));
 
     mainWindow.setWindowTitle("Remit");
