@@ -10,15 +10,17 @@ CONFIG += c++17
 INCLUDEPATH += $$PWD/include
 
 SOURCES += \
+    remitwebpage.cpp \
     main.cpp \
-    src/constants.cpp \
-    src/mainwindow.cpp \
-    src/settings.cpp
+    constants.cpp \
+    mainwindow.cpp \
+    settings.cpp
 
 HEADERS += \
-    include/constants.h \
-    include/mainwindow.h \
-    include/settings.h
+    constants.h \
+    mainwindow.h \
+    remitwebpage.h \
+    settings.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

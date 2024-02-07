@@ -1,5 +1,5 @@
-#include "include/settings.h"
-#include "include/constants.h"
+#include "settings.h"
+#include "constants.h"
 
 namespace SettingsPaths {
 QString baseUrlPath = "remit/base_url";
