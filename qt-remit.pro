@@ -13,14 +13,12 @@ SOURCES += \
     main.cpp \
     src/constants.cpp \
     src/mainwindow.cpp \
-    src/settings.cpp \
-    src/webengineviewwithnavigationsignals.cpp
+    src/settings.cpp
 
 HEADERS += \
     include/constants.h \
     include/mainwindow.h \
-    include/settings.h \
-    include/webengineviewwithnavigationsignals.h
+    include/settings.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
