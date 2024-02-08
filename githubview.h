@@ -15,7 +15,7 @@ signals:
 
 private:
     bool handleUrlAndEmitSignals(const QUrl& url);
-    void init(); // I forgot how to properly overload constructors to not need this.
+    void init() const; // I forgot how to properly overload constructors to not need this.
 
 private slots:
     void handleNavigationRequest(QWebEngineNavigationRequest& request);

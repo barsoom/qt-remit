@@ -4,16 +4,18 @@
 #include <QWebEngineNewWindowRequest>
 
 RemitView::RemitView(QWidget* parent): QWebEngineView(parent) {
-    connectToPageSignals();
+    init();
 }
 
 RemitView::RemitView(QWebEngineProfile* profile, QWidget* parent): QWebEngineView(profile, parent) {
-    connectToPageSignals();
+    init();
 }
 
-void RemitView::connectToPageSignals() const {
+void RemitView::init() const {
     connect(page(), &QWebEnginePage::navigationRequested, this, &RemitView::handleNavigationRequest);
     connect(page(), &QWebEnginePage::newWindowRequested, this, &RemitView::handleNewWindowRequest);
+
+    page()->load((Settings::remitUrl()));
 }
 
 bool RemitView::handleUrlAndEmitSignals(const QUrl& url) {

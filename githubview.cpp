@@ -13,7 +13,7 @@ GithubView::GithubView(QWebEngineProfile* profile, QWidget* parent): QWebEngineV
     init();
 }
 
-void GithubView::init() {
+void GithubView::init() const {
     connect(
         page(), &QWebEnginePage::newWindowRequested,
         this, &GithubView::handleNewWindowRequest
@@ -23,6 +23,8 @@ void GithubView::init() {
         page(), &QWebEnginePage::navigationRequested,
         this, &GithubView::handleNavigationRequest
     );
+
+    page()->load(Settings::githubUrl());
 }
 
 bool GithubView::handleUrlAndEmitSignals(const QUrl& url) {

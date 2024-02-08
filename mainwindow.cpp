@@ -2,7 +2,6 @@
 #include <QDesktopServices>
 #include "mainwindow.h"
 #include "constants.h"
-#include "settings.h"
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
@@ -20,9 +19,6 @@ MainWindow::MainWindow(QWidget* parent)
     // TODO: Restore & save splitter state using splitter.saveState and splitter.restoreState. Until then, this is a decent starting point
     splitter.setStretchFactor(0, 1);
     splitter.setStretchFactor(1, 2);
-
-    remitView.setUrl(Settings::remitUrl());
-    githubView.setUrl(QUrl("https://github.com"));
 
     setWindowTitle("Remit");
     setCentralWidget(&splitter);

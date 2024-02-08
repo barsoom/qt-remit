@@ -16,7 +16,7 @@ signals:
 
 private:
     bool handleUrlAndEmitSignals(const QUrl& url);
-    void connectToPageSignals() const;
+    void init() const;
 
 private slots:
     void handleNavigationRequest(QWebEngineNavigationRequest& request);
