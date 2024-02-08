@@ -10,16 +10,16 @@ CONFIG += c++17
 INCLUDEPATH += $$PWD/include
 
 SOURCES += \
-    remitwebpage.cpp \
     main.cpp \
     constants.cpp \
     mainwindow.cpp \
+    remitview.cpp \
     settings.cpp
 
 HEADERS += \
     constants.h \
     mainwindow.h \
-    remitwebpage.h \
+    remitview.h \
     settings.h
 
 # Default rules for deployment.

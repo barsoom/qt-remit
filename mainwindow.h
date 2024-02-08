@@ -6,6 +6,8 @@
 #include <QWebEngineView>
 #include <QWebEngineProfile>
 
+#include "remitview.h"
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -16,7 +18,12 @@ public:
 private:
     QSplitter splitter;
     QWebEngineProfile profile;
-    QWebEngineView leftView;
-    QWebEngineView rightView;
+    RemitView remitView;
+    QWebEngineView githubView;
+
+    void connectSignals();
+
+protected slots:
+    void openInGithubView(const QUrl& url);
 };
 #endif // MAINWINDOW_H
