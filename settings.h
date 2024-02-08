@@ -3,12 +3,12 @@
 
 #include <QSettings>
 #include <QString>
+#include <QUrl>
 
 class Settings
 {
 public:
-    static QString remitBaseUrl();
-    static QString remitAuthToken();
+    static QUrl remitUrl();
 
 private:
     // static facades to QSettings

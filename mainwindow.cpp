@@ -21,8 +21,7 @@ MainWindow::MainWindow(QWidget* parent)
     splitter.setStretchFactor(0, 1);
     splitter.setStretchFactor(1, 2);
 
-    QUrl leftUrl(Settings::remitBaseUrl() + "?auth_key=" + Settings::remitAuthToken());
-    remitView.setUrl(leftUrl);
+    remitView.setUrl(Settings::remitUrl());
     githubView.setUrl(QUrl("https://github.com"));
 
     setWindowTitle("Remit");

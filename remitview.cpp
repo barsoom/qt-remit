@@ -1,4 +1,5 @@
 #include "remitview.h"
+#include "settings.h"
 #include <QWebEngineNavigationRequest>
 #include <QWebEngineNewWindowRequest>
 
@@ -21,7 +22,7 @@ bool RemitView::handleUrlAndEmitSignals(const QUrl& url) {
         return false;
     }
 
-    if (url.host() != "ex-remit.herokuapp.com") {
+    if (url.host() != Settings::remitUrl().host()) {
         emit externalNavigationRequested(url);
         return false;
     }

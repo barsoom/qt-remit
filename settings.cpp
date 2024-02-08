@@ -1,3 +1,4 @@
+#include <QUrlQuery>
 #include "settings.h"
 #include "constants.h"
 
@@ -6,12 +7,17 @@ QString baseUrlPath = "remit/base_url";
 QString authTokenPath = "remit/auth_token";
 }
 
-QString Settings::remitBaseUrl() {
-    return Settings::value(SettingsPaths::baseUrlPath, "https://example.com/").toString();
-}
+QUrl Settings::remitUrl() {
+    auto baseUrl = Settings::value(SettingsPaths::baseUrlPath, "https://example.com/").toString();
+    auto authToken = Settings::value(SettingsPaths::authTokenPath, "").toString();
 
-QString Settings::remitAuthToken() {
-    return Settings::value(SettingsPaths::authTokenPath, "").toString();
+    QUrlQuery authQueryParams;
+    authQueryParams.addQueryItem("auth_key", authToken);
+
+    QUrl result(baseUrl);
+    result.setQuery(authQueryParams);
+
+    return result;
 }
 
 
