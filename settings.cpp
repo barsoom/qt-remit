@@ -7,6 +7,12 @@ QString baseUrlPath = "remit/base_url";
 QString authTokenPath = "remit/auth_token";
 }
 
+
+QSettings& getInstance() {
+    static QSettings instance(Constants::configPath() + "/config.ini", QSettings::IniFormat);
+    return instance;
+}
+
 QUrl Settings::remitUrl() {
     auto baseUrl = Settings::value(SettingsPaths::baseUrlPath, "https://example.com/").toString();
     auto authToken = Settings::value(SettingsPaths::authTokenPath, "").toString();
@@ -20,10 +26,8 @@ QUrl Settings::remitUrl() {
     return result;
 }
 
-
-QSettings& Settings::getInstance() {
-    static QSettings instance(Constants::configPath() + "/config.ini", QSettings::IniFormat);
-    return instance;
+QUrl Settings::githubUrl() {
+    return QUrl("https://github.com/");
 }
 
 QVariant Settings::value(QAnyStringView key, const QVariant& defaultValue)

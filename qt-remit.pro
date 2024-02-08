@@ -10,6 +10,7 @@ CONFIG += c++17
 INCLUDEPATH += $$PWD/include
 
 SOURCES += \
+    githubview.cpp \
     main.cpp \
     constants.cpp \
     mainwindow.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
 
 HEADERS += \
     constants.h \
+    githubview.h \
     mainwindow.h \
     remitview.h \
     settings.h

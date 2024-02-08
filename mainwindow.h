@@ -3,10 +3,10 @@
 
 #include <QMainWindow>
 #include <QSplitter>
-#include <QWebEngineView>
 #include <QWebEngineProfile>
 
 #include "remitview.h"
+#include "githubview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -19,7 +19,7 @@ private:
     QSplitter splitter;
     QWebEngineProfile profile;
     RemitView remitView;
-    QWebEngineView githubView;
+    GithubView githubView;
 
     void connectSignals();
 

@@ -1,26 +1,25 @@
-#ifndef REMITVIEW_H
-#define REMITVIEW_H
+#ifndef GITHUBVIEW_H
+#define GITHUBVIEW_H
 
 #include <QWebEngineView>
 
-class RemitView : public QWebEngineView
+class GithubView : public QWebEngineView
 {
     Q_OBJECT
 public:
-    RemitView(QWidget* parent = nullptr);
-    RemitView(QWebEngineProfile* profile, QWidget* parent = nullptr);
+    GithubView(QWidget* parent = nullptr);
+    GithubView(QWebEngineProfile* profile, QWidget* parent = nullptr);
 
 signals:
-    void githubNavigationRequested(const QUrl& url);
     void externalNavigationRequested(const QUrl& url);
 
 private:
     bool handleUrlAndEmitSignals(const QUrl& url);
-    void connectToPageSignals() const;
+    void init(); // I forgot how to properly overload constructors to not need this.
 
 private slots:
     void handleNavigationRequest(QWebEngineNavigationRequest& request);
     void handleNewWindowRequest(QWebEngineNewWindowRequest& request);
 };
 
-#endif // REMITVIEW_H
+#endif // GITHUBVIEW_H
