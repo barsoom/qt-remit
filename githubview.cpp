@@ -5,8 +5,13 @@
 #include "githubview.h"
 #include "settings.h"
 
-GithubView::GithubView(QWidget* parent): QWebEngineView(parent) {}
-GithubView::GithubView(QWebEngineProfile* profile, QWidget* parent): QWebEngineView(profile, parent) {}
+GithubView::GithubView(QWidget* parent): QWebEngineView(parent) {
+    init();
+}
+
+GithubView::GithubView(QWebEngineProfile* profile, QWidget* parent): QWebEngineView(profile, parent) {
+    init();
+}
 
 void GithubView::init() {
     connect(
@@ -18,7 +23,6 @@ void GithubView::init() {
         page(), &QWebEnginePage::navigationRequested,
         this, &GithubView::handleNavigationRequest
     );
-    setUrl(QUrl("http://example.com"));
 }
 
 bool GithubView::handleUrlAndEmitSignals(const QUrl& url) {

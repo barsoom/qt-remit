@@ -13,8 +13,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    MainWindow(QWidget* parent = nullptr);
+
 private:
     QSplitter splitter;
     QWebEngineProfile profile;
@@ -25,5 +25,6 @@ private:
 
 protected slots:
     void openInGithubView(const QUrl& url);
+    void openInDefaultBrowser(const QUrl& url);
 };
 #endif // MAINWINDOW_H

@@ -17,7 +17,7 @@ void RemitView::connectToPageSignals() const {
 }
 
 bool RemitView::handleUrlAndEmitSignals(const QUrl& url) {
-    if (url.host() == "github.com") {
+    if (url.host() == Settings::githubUrl().host()) {
         emit githubNavigationRequested(url);
         return false;
     }

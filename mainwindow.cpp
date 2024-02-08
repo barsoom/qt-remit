@@ -31,9 +31,17 @@ MainWindow::MainWindow(QWidget* parent)
         &remitView, &RemitView::githubNavigationRequested,
         this, &MainWindow::openInGithubView
         );
-}
 
-MainWindow::~MainWindow() {}
+    connect(
+        &remitView, &RemitView::externalNavigationRequested,
+        this, &MainWindow::openInDefaultBrowser
+        );
+
+    connect(
+        &githubView, &GithubView::externalNavigationRequested,
+        this, &MainWindow::openInDefaultBrowser
+        );
+}
 
 void MainWindow::connectSignals() {
 }
@@ -41,4 +49,8 @@ void MainWindow::connectSignals() {
 void MainWindow::openInGithubView(const QUrl& url) {
     if (url != githubView.url())
         githubView.setUrl(url);
+}
+
+void MainWindow::openInDefaultBrowser(const QUrl& url) {
+    QDesktopServices::openUrl(url);
 }
