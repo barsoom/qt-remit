@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QSplitter>
-#include <QWebEngineProfile>
 
 #include "remitview.h"
 #include "githubview.h"
@@ -17,7 +16,6 @@ public:
 
 private:
     QSplitter splitter;
-    QWebEngineProfile profile;
     RemitView remitView;
     GithubView githubView;
 

@@ -6,13 +6,9 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent),
     splitter(),
-    profile("RemitProfile", nullptr),
-    remitView(&profile),
-    githubView(&profile)
+    remitView(Constants::webProfile()),
+    githubView(Constants::webProfile())
 {
-    profile.setPersistentStoragePath(Constants::dataPath() + "webProfile");
-    profile.setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
-
     splitter.addWidget(&remitView);
     splitter.addWidget(&githubView);
 

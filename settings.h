@@ -1,9 +1,10 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <QSettings>
-#include <QString>
-#include <QUrl>
+class QAnyStringView;
+class QVariant;
+class QWebEngineProfile;
+class QUrl;
 
 class Settings
 {

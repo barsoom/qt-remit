@@ -1,10 +1,14 @@
+#include <QSettings>
+#include <QUrl>
 #include <QUrlQuery>
+#include <QWebEngineProfile>
+
 #include "settings.h"
 #include "constants.h"
 
 namespace SettingsPaths {
-QString baseUrlPath = "remit/base_url";
-QString authTokenPath = "remit/auth_token";
+    QString baseUrlPath = "remit/base_url";
+    QString authTokenPath = "remit/auth_token";
 }
 
 
