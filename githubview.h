@@ -8,14 +8,12 @@ class GithubView : public QWebEngineView
     Q_OBJECT
 public:
     GithubView(QWidget* parent = nullptr);
-    GithubView(QWebEngineProfile* profile, QWidget* parent = nullptr);
 
 signals:
     void externalNavigationRequested(const QUrl& url);
 
 private:
     bool handleUrlAndEmitSignals(const QUrl& url);
-    void init() const; // I forgot how to properly overload constructors to not need this.
 
 private slots:
     void handleNavigationRequest(QWebEngineNavigationRequest& request);

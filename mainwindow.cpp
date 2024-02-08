@@ -3,11 +3,7 @@
 #include "mainwindow.h"
 #include "constants.h"
 
-MainWindow::MainWindow(QWidget* parent)
-    : QMainWindow(parent),
-    splitter(),
-    remitView(Constants::webProfile()),
-    githubView(Constants::webProfile())
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
     splitter.addWidget(&remitView);
     splitter.addWidget(&githubView);

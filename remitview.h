@@ -8,7 +8,6 @@ class RemitView : public QWebEngineView
     Q_OBJECT
 public:
     RemitView(QWidget* parent = nullptr);
-    RemitView(QWebEngineProfile* profile, QWidget* parent = nullptr);
 
 signals:
     void githubNavigationRequested(const QUrl& url);
@@ -16,7 +15,6 @@ signals:
 
 private:
     bool handleUrlAndEmitSignals(const QUrl& url);
-    void init() const;
 
 private slots:
     void handleNavigationRequest(QWebEngineNavigationRequest& request);

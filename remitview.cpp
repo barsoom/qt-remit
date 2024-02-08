@@ -1,17 +1,10 @@
 #include "remitview.h"
+#include "constants.h"
 #include "settings.h"
 #include <QWebEngineNavigationRequest>
 #include <QWebEngineNewWindowRequest>
 
-RemitView::RemitView(QWidget* parent): QWebEngineView(parent) {
-    init();
-}
-
-RemitView::RemitView(QWebEngineProfile* profile, QWidget* parent): QWebEngineView(profile, parent) {
-    init();
-}
-
-void RemitView::init() const {
+RemitView::RemitView(QWidget* parent): QWebEngineView(Constants::webProfile(), parent) {
     connect(page(), &QWebEnginePage::navigationRequested, this, &RemitView::handleNavigationRequest);
     connect(page(), &QWebEnginePage::newWindowRequested, this, &RemitView::handleNewWindowRequest);
 

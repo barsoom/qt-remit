@@ -3,26 +3,12 @@
 #include <QWebEngineNewWindowRequest>
 
 #include "githubview.h"
+#include "constants.h"
 #include "settings.h"
 
-GithubView::GithubView(QWidget* parent): QWebEngineView(parent) {
-    init();
-}
-
-GithubView::GithubView(QWebEngineProfile* profile, QWidget* parent): QWebEngineView(profile, parent) {
-    init();
-}
-
-void GithubView::init() const {
-    connect(
-        page(), &QWebEnginePage::newWindowRequested,
-        this, &GithubView::handleNewWindowRequest
-    );
-
-    connect(
-        page(), &QWebEnginePage::navigationRequested,
-        this, &GithubView::handleNavigationRequest
-    );
+GithubView::GithubView(QWidget* parent): QWebEngineView(Constants::webProfile(), parent) {
+    connect(page(), &QWebEnginePage::newWindowRequested,this, &GithubView::handleNewWindowRequest);
+    connect(page(), &QWebEnginePage::navigationRequested,this, &GithubView::handleNavigationRequest);
 
     page()->load(Settings::githubUrl());
 }
