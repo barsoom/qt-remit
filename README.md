@@ -8,6 +8,20 @@ Show you remit and github side-by-side, so you can review comfortably.
 
 Because the other two only work on macOS and one bold developer had to use Linux.
 
+## Setting things up
+
+> [!NOTE]
+> This flow isn't ideal. There's an [issue](https://github.com/barsoom/qt-remit/issues/4) to build a Dialog that prompts for Remit's URL and Token.
+
+1. Run qt-remit. The left pane will show an example page. That's fine, we'll fix that later.
+1. Log into Github in the right pane
+1. Close qt-remit
+1. Find the config file and set the Remit URL and token. qt-remit uses [QStandardPaths::AppConfigLocation](https://doc.qt.io/qt-6/qstandardpaths.html#StandardLocation-enum)
+    - on macOS, the file is at `~/Library/Preferences/qt-remit/config.ini`
+    - on Linux, the file is at `~/.config/qt-remit/config.ini`
+1. Open qt-remit again
+1. Go to the remit settings and click "Sign in with Github"
+
 ## Build instructions
 
 ### Setup Dependencies
