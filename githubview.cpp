@@ -22,6 +22,12 @@ bool GithubView::handleUrlAndEmitSignals(const QUrl& url) {
 }
 
 void GithubView::handleNavigationRequest(QWebEngineNavigationRequest& request){
+    if(!request.isMainFrame()) {
+        // github is fetching resources, rich image diffs, the like
+        request.accept();
+        return;
+    }
+
     if(handleUrlAndEmitSignals(request.url()))
         request.accept();
     else
