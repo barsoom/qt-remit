@@ -18,16 +18,17 @@ QSettings& getInstance() {
 }
 
 QUrl Settings::remitUrl() {
-    auto baseUrl = Settings::value(SettingsPaths::baseUrlPath, "https://example.com/").toString();
-    auto authToken = Settings::value(SettingsPaths::authTokenPath, "").toString();
-
     QUrlQuery authQueryParams;
-    authQueryParams.addQueryItem("auth_key", authToken);
+    authQueryParams.addQueryItem("auth_key", value(SettingsPaths::authTokenPath, "").toString());
 
-    QUrl result(baseUrl);
+    auto result = remitBaseUrl();
     result.setQuery(authQueryParams);
 
     return result;
+}
+
+QUrl Settings::remitBaseUrl() {
+    return QUrl(value(SettingsPaths::baseUrlPath, "https://example.com/").toString());
 }
 
 QUrl Settings::githubUrl() {

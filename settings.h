@@ -10,6 +10,7 @@ class Settings
 {
 public:
     static QUrl remitUrl();
+    static QUrl remitBaseUrl();
     static QUrl githubUrl();
 
 private:

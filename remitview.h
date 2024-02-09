@@ -14,6 +14,7 @@ signals:
     void externalNavigationRequested(const QUrl& url);
 
 private:
+    bool loggingIn;
     bool handleUrlAndEmitSignals(const QUrl& url);
 
 private slots:
