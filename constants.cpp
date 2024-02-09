@@ -17,7 +17,6 @@ QWebEngineProfile* Constants::webProfile() {
     static QWebEngineProfile profile("RemitProfile", nullptr);
 
     if(!configured) {
-        profile.setPersistentStoragePath(Constants::dataPath() + "webProfile");
         profile.setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
         configured = true;
     }
