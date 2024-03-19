@@ -51,8 +51,8 @@ Qt SDK Installation through linux package managers is untested (read: Please try
 
 1. Clone the repository
 1. Create a folder for the build output.
+1. `cmake -S path/to/qt-remit/ -O path/to/build/folder`
 1. `cd` into the build output folder
-1. `qmake path/to/qt-remit/qt-remit.pro`
 1. `make`
 
 This should generate a binary you can put somewhere on your path and run, as long as it can find a Qt6 that has the WebEngineWidgets installed.
