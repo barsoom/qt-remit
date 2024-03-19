@@ -5,7 +5,10 @@
 #include <QWebEngineNavigationRequest>
 #include <QWebEngineNewWindowRequest>
 
-RemitView::RemitView(QWidget* parent): QWebEngineView(Constants::webProfile(), parent) {
+RemitView::RemitView(QWidget* parent):
+    QWebEngineView(Constants::webProfile(), parent),
+    loggingIn(false)
+{
     connect(page(), &QWebEnginePage::navigationRequested, this, &RemitView::handleNavigationRequest);
     connect(page(), &QWebEnginePage::newWindowRequested, this, &RemitView::handleNewWindowRequest);
 
