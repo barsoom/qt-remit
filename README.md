@@ -6,7 +6,7 @@ Show you remit and github side-by-side, so you can review comfortably.
 
 ## Why a third client?
 
-Because the other two only work on macOS and one bold developer had to use Linux.
+Because the other two only work on macOS and one german bold developer had to use Linux.
 
 ## Setting things up
 
