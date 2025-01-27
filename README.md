@@ -43,6 +43,8 @@ You'll also need Qt-development dependencies for Qt6.6. Make sure you install:
 
 I installed Qt 6.6.1 through the [Qt OSS online installer](https://www.qt.io/download-qt-installer-oss). If you use that, remember to check "Qt WebEngine" in the "Additional Libraries" for the Qt version you're installing. Just selecting 'Qt for Desktop development' is not enough.
 
+On Linux with Qt 6.6.3 this worked: Custom Installation -> Qt -> 6.6.3 -> gcc, Qt 3D (maybe not needed), Qt WebEngine. Keep CMake and Ninja (needed?) in Build Tools. `sudo apt install libglx-dev libgl1-mesa-dev`. Then follow "Building qt-remit" below.
+
 On macOS: `brew install qt`
 
 Qt SDK Installation through linux package managers is untested (read: Please try setting this up using brew if you have the time!)
