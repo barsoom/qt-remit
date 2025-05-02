@@ -45,7 +45,7 @@ I installed Qt 6.6.1 through the [Qt OSS online installer](https://www.qt.io/dow
 
 On Linux with Qt 6.6.3 this worked: Custom Installation -> Qt -> 6.6.3 -> gcc, Qt 3D (maybe not needed), Qt WebEngine. Keep CMake and Ninja (needed?) in Build Tools. `sudo apt install libglx-dev libgl1-mesa-dev`. Then follow "Building qt-remit" below.
 
-To set up paths this worked `PATH=$(find ~/Qt|grep "/bin$"|xargs -I{} echo -n {}:)$PATH`.
+To set up paths this worked `PATH=$(find ~/Qt|grep "/bin$"|xargs -I{} echo -n {}:)$PATH`
 
 On macOS: `brew install qt`
 
