@@ -40,6 +40,7 @@ You'll also need Qt-development dependencies for Qt6.6. Make sure you install:
 - QWebEngineCore
 - QWebEngineWidgets
 - qmake
+- cmake (brew install cmake)
 
 I installed Qt 6.6.1 through the [Qt OSS online installer](https://www.qt.io/download-qt-installer-oss). If you use that, remember to check "Qt WebEngine" in the "Additional Libraries" for the Qt version you're installing. Just selecting 'Qt for Desktop development' is not enough.
 
