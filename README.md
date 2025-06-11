@@ -25,32 +25,45 @@ Because the other two only work on macOS and one bold developer had to use Linux
 ## Build instructions
 
 ### Setup Dependencies
+You need
+- A C++ compiler
+- CMake
+- Qt Libraries
 
-You'll need C++ development dependencies. Most linux distros have a package/pattern/package group for that:
+#### macOS
 
-- Ubuntu: `sudo apt install build-essential`
-- Arch: `sudo pacman -S base-devel`
-- OpenSUSE Tumbleweed: `sudo zypper in -t pattern devel_C_C++`
-- macOS: `xcode-select --install`. If you have git on your mac, this is done.
+The quickest way is
+```bash
+xcode-select --install # Installs the xcode tools, including git and a C++ compiler. If you used git to clone this repo, you can skip this line
+brew install cmake
+brew install qt # Installs a full set of Qt libraries, including all of the ones qt-remit needs
+```
 
-You'll also need Qt-development dependencies for Qt6.6. Make sure you install:
+#### Ubuntu, with apt
 
-- Core
-- QWidgets
-- QWebEngineCore
-- QWebEngineWidgets
-- qmake
-- cmake (brew install cmake)
+```bash
+sudo apt install build-essential cmake
+sudo apt install libqt6webenginewidgets6 # Should pull in everything else as dependencies
+```
 
-I installed Qt 6.6.1 through the [Qt OSS online installer](https://www.qt.io/download-qt-installer-oss). If you use that, remember to check "Qt WebEngine" in the "Additional Libraries" for the Qt version you're installing. Just selecting 'Qt for Desktop development' is not enough.
+If you're on a different distro that doesn't package Qt in a comparable way, check the Windows section below for how to install Qt from the online installer.
 
-On Linux with Qt 6.6.3 this worked: Custom Installation -> Qt -> 6.6.3 -> gcc, Qt 3D (maybe not needed), Qt WebEngine. Keep CMake and Ninja (needed?) in Build Tools. `sudo apt install libglx-dev libgl1-mesa-dev`. Then follow "Building qt-remit" below.
+Report from joakimk:
+> On Linux with Qt 6.6.3 this worked: Custom Installation -> Qt -> 6.6.3 -> gcc, Qt WebEngine. Keep CMake in Build Tools. `sudo apt install libglx-dev libgl1-mesa-dev`. Then follow "Building qt-remit" below.
 
-To set up paths this worked `PATH=$(find ~/Qt|grep "/bin$"|xargs -I{} echo -n {}:)$PATH`
+#### Windows
 
-On macOS: `brew install qt`
+Install the [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022).
 
-Qt SDK Installation through linux package managers is untested (read: Please try setting this up using brew if you have the time!)
+Install Qt through the [Qt OSS online installer](https://www.qt.io/download-qt-installer-oss).
+
+At the time of writing, the latest version is 6.9.1. The WebEngine part may have moved since then (it also moved between 6.6 and 6.9)
+
+Do a custom installation and make sure you install
+- Extensions -> Qt WebEngine -> Qt 6.9.1
+- Qt -> 6.9.1 -> Desktop
+- Qt -> Build Tools -> CMake 3.30.5 (the version doesn't matter)
+
 
 ### Building qt-remit
 
@@ -64,10 +77,10 @@ This should generate a binary you can put somewhere on your path and run, as lon
 
 ### Packaging qt-remit
 
-On OpenSUSE Tumbleweed, `sudo zypper in libQt6WebEngineWidgets6` gets you everything you need, since it depends on everything else qt-remit depends on.
-When building a package, make sure this is listed as a requirement.
+On macOS, the build steps above produce an application package without an icon.
+Drop that into your `/Applications` folder to have it available from your launcher of choice.
 
-On macOS, the build steps above produce an application package without an icon. Dropping that into your `/Applications` folder should just work.
+On Windows, the build steps produce a self-contained binary without an icon. Drop that wherever you want to execute it from and set up a link.
 
 ## Is it any good?
 
