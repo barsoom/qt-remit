@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/qt-remit.png</file>
+    </qresource>
+</RCC>

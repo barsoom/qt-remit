@@ -47,3 +47,21 @@ void Settings::setValue(QAnyStringView key, const QVariant& value)
 {
     getInstance().setValue(key, value);
 }
+
+bool Settings::isConfigured()
+{
+    QString baseUrl = value(SettingsPaths::baseUrlPath, "https://example.com/").toString();
+    QString authToken = value(SettingsPaths::authTokenPath, "").toString();
+
+    return baseUrl != "https://example.com/" && !authToken.isEmpty();
+}
+
+void Settings::setRemitBaseUrl(const QString& url)
+{
+    setValue(SettingsPaths::baseUrlPath, url);
+}
+
+void Settings::setAuthToken(const QString& token)
+{
+    setValue(SettingsPaths::authTokenPath, token);
+}
