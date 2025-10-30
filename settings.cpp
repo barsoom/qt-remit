@@ -9,6 +9,8 @@
 namespace SettingsPaths {
     QString baseUrlPath = "remit/base_url";
     QString authTokenPath = "remit/auth_token";
+    QString splitterLeftWidthPath = "ui/splitter_left_width";
+    QString windowGeometryPath = "ui/window_geometry";
 }
 
 
@@ -46,4 +48,24 @@ QVariant Settings::value(QAnyStringView key, const QVariant& defaultValue)
 void Settings::setValue(QAnyStringView key, const QVariant& value)
 {
     getInstance().setValue(key, value);
+}
+
+int Settings::splitterLeftWidth()
+{
+    return value(SettingsPaths::splitterLeftWidthPath, -1).toInt();
+}
+
+void Settings::setSplitterLeftWidth(int width)
+{
+    setValue(SettingsPaths::splitterLeftWidthPath, width);
+}
+
+QByteArray Settings::windowGeometry()
+{
+    return value(SettingsPaths::windowGeometryPath, QByteArray()).toByteArray();
+}
+
+void Settings::setWindowGeometry(const QByteArray& geometry)
+{
+    setValue(SettingsPaths::windowGeometryPath, geometry);
 }
