@@ -3,6 +3,10 @@
 
 #include <QWebEngineView>
 
+#include "clipboardbridge.h"
+
+class QWebChannel;
+
 class GithubView : public QWebEngineView
 {
     Q_OBJECT
@@ -14,6 +18,10 @@ signals:
 
 private:
     bool handleUrlAndEmitSignals(const QUrl& url);
+    void setupClipboardBridge();
+
+    ClipboardBridge clipboardBridge;
+    QWebChannel* webChannel;
 
 private slots:
     void handleNavigationRequest(QWebEngineNavigationRequest& request);
