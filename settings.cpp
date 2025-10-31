@@ -9,11 +9,18 @@
 namespace SettingsPaths {
     QString baseUrlPath = "remit/base_url";
     QString authTokenPath = "remit/auth_token";
+    QString splitterLeftWidthPath = "ui/splitter_left_width";
+    QString windowGeometryPath = "ui/window_geometry";
 }
 
 
 QSettings& getInstance() {
     static QSettings instance(Constants::configPath() + "/config.ini", QSettings::IniFormat);
+    return instance;
+}
+
+QSettings& getGeometryInstance() {
+    static QSettings instance(Constants::dataPath() + "/lastWindowGeometry.ini", QSettings::IniFormat);
     return instance;
 }
 

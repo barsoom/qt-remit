@@ -14,10 +14,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget* parent = nullptr);
 
+protected:
+    void closeEvent(QCloseEvent* event) override;
+    void showEvent(QShowEvent* event) override;
+
 private:
     QSplitter splitter;
     RemitView remitView;
     GithubView githubView;
+    int savedSplitterWidth;
 
     void connectSignals();
 
