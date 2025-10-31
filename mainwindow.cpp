@@ -4,7 +4,7 @@
 #include <QShowEvent>
 #include "mainwindow.h"
 #include "constants.h"
-#include "settings.h"
+#include "lastwindowstate.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidth(-1)
 {
@@ -12,13 +12,13 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidt
     splitter.addWidget(&githubView);
 
     // Restore window geometry (position and size)
-    QByteArray geometry = Settings::windowGeometry();
+    QByteArray geometry = LastWindowState::windowGeometry();
     if (!geometry.isEmpty()) {
         restoreGeometry(geometry);
     }
 
     // Load saved splitter width (will be applied in showEvent)
-    savedSplitterWidth = Settings::splitterLeftWidth();
+    savedSplitterWidth = LastWindowState::splitterLeftWidth();
 
     // Set default ratio for initial layout
     splitter.setStretchFactor(0, 1);
@@ -70,12 +70,12 @@ void MainWindow::showEvent(QShowEvent* event) {
 
 void MainWindow::closeEvent(QCloseEvent* event) {
     // Save window geometry (position and size)
-    Settings::setWindowGeometry(saveGeometry());
+    LastWindowState::setWindowGeometry(saveGeometry());
 
     // Save the width of the left column
     QList<int> sizes = splitter.sizes();
     if (!sizes.isEmpty()) {
-        Settings::setSplitterLeftWidth(sizes[0]);
+        LastWindowState::setSplitterLeftWidth(sizes[0]);
     }
     QMainWindow::closeEvent(event);
 }

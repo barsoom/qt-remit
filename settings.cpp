@@ -19,6 +19,11 @@ QSettings& getInstance() {
     return instance;
 }
 
+QSettings& getGeometryInstance() {
+    static QSettings instance(Constants::dataPath() + "/lastWindowGeometry.ini", QSettings::IniFormat);
+    return instance;
+}
+
 QUrl Settings::remitUrl() {
     QUrlQuery authQueryParams;
     authQueryParams.addQueryItem("auth_key", value(SettingsPaths::authTokenPath, "").toString());
@@ -48,24 +53,4 @@ QVariant Settings::value(QAnyStringView key, const QVariant& defaultValue)
 void Settings::setValue(QAnyStringView key, const QVariant& value)
 {
     getInstance().setValue(key, value);
-}
-
-int Settings::splitterLeftWidth()
-{
-    return value(SettingsPaths::splitterLeftWidthPath, -1).toInt();
-}
-
-void Settings::setSplitterLeftWidth(int width)
-{
-    setValue(SettingsPaths::splitterLeftWidthPath, width);
-}
-
-QByteArray Settings::windowGeometry()
-{
-    return value(SettingsPaths::windowGeometryPath, QByteArray()).toByteArray();
-}
-
-void Settings::setWindowGeometry(const QByteArray& geometry)
-{
-    setValue(SettingsPaths::windowGeometryPath, geometry);
 }

@@ -13,11 +13,7 @@ public:
     static QUrl remitBaseUrl();
     static QUrl githubUrl();
 
-    static int splitterLeftWidth();
-    static void setSplitterLeftWidth(int width);
 
-    static QByteArray windowGeometry();
-    static void setWindowGeometry(const QByteArray& geometry);
 
 private:
     // static facades to QSettings
