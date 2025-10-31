@@ -5,6 +5,8 @@ project(qt-remit VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_AUTORCC ON)
+
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets WebEngineWidgets WebChannel)
 qt_standard_project_setup()
 
@@ -27,6 +29,8 @@ set(APP_SOURCES
   lastwindowstate.cpp
   clipboardbridge.cpp
   main.cpp
+  settingsdialog.cpp
+  ${RESOURCES}
 )
 if(APPLE)
   list(APPEND APP_SOURCES ${app_icon_macos})

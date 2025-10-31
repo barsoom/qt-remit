@@ -13,7 +13,9 @@ public:
     static QUrl remitBaseUrl();
     static QUrl githubUrl();
 
-
+    static bool isConfigured();
+    static void setRemitBaseUrl(const QString& url);
+    static void setAuthToken(const QString& token);
 
 private:
     // static facades to QSettings
