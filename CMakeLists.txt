@@ -12,6 +12,8 @@ set(MACOSX_BUNDLE_ICON_FILE qt-remit.icns)
 set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/resources/qt-remit.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
+set(WIN_RC "${CMAKE_CURRENT_SOURCE_DIR}/resources/qt-remit.rc")
+
 qt_add_executable(qt-remit
     githubview.cpp
     constants.cpp
@@ -20,7 +22,8 @@ qt_add_executable(qt-remit
     settings.cpp
     clipboardbridge.cpp
     main.cpp
-    ${app_icon_macos}
+  ${app_icon_macos}
+  ${WIN_RC}
 )
 
 target_link_libraries(qt-remit PRIVATE Qt6::Widgets Qt6::WebEngineWidgets Qt6::WebChannel)
