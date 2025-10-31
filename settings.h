@@ -13,6 +13,8 @@ public:
     static QUrl remitBaseUrl();
     static QUrl githubUrl();
 
+
+
 private:
     // static facades to QSettings
     static QVariant value(QAnyStringView key, const QVariant& defaultValue);

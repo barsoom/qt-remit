@@ -24,6 +24,7 @@ set(APP_SOURCES
   mainwindow.cpp
   remitview.cpp
   settings.cpp
+  lastwindowstate.cpp
   clipboardbridge.cpp
   main.cpp
 )
