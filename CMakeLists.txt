@@ -29,3 +29,5 @@ set_target_properties(qt-remit PROPERTIES
   WIN32_EXECUTABLE ON
   MACOSX_BUNDLE ON
 )
+
+target_compile_definitions( ${PROJECT_NAME} PRIVATE __clang_major__=18)
