@@ -21,6 +21,7 @@ SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent)
     );
     instructions->setWordWrap(true);
     instructions->setAlignment(Qt::AlignCenter);
+    instructions->setContentsMargins(0, 0, 0, 10);
     QFont headerFont = instructions->font();
     headerFont.setPointSize(headerFont.pointSize() + 2);
     instructions->setFont(headerFont);
