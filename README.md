@@ -77,10 +77,10 @@ This should generate a binary you can put somewhere on your path and run, as lon
 
 ### Packaging qt-remit
 
-On macOS, the build steps above produce an application package without an icon.
+On macOS, the build steps above produce an application package.
 Drop that into your `/Applications` folder to have it available from your launcher of choice.
 
-On Windows, the build steps produce a self-contained binary without an icon. Drop that wherever you want to execute it from and set up a link.
+On Windows, the build steps produce a self-contained binary. Drop that wherever you want to execute it from and set up a link.
 
 ## Is it any good?
 
