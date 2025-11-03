@@ -63,3 +63,5 @@ tags
 *.pyc
 *.Release
 
+# Temporary files
+tmp/
