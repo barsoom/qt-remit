@@ -2,14 +2,27 @@
 #include <QDesktopServices>
 #include <QCloseEvent>
 #include <QShowEvent>
+#include <QVBoxLayout>
 #include "mainwindow.h"
 #include "constants.h"
 #include "lastwindowstate.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidth(-1)
 {
-    splitter.addWidget(&remitView);
-    splitter.addWidget(&githubView);
+    QWidget* remitContainer = new QWidget;
+    QVBoxLayout* remitLayout = new QVBoxLayout(remitContainer);
+    remitLayout->setContentsMargins(0, 0, 0, 0);
+    remitLayout->setSpacing(0);
+    remitLayout->addWidget(&remitView);
+
+    QWidget* githubContainer = new QWidget;
+    QVBoxLayout* githubLayout = new QVBoxLayout(githubContainer);
+    githubLayout->setContentsMargins(0, 0, 0, 0);
+    githubLayout->setSpacing(0);
+    githubLayout->addWidget(&githubView);
+
+    splitter.addWidget(remitContainer);
+    splitter.addWidget(githubContainer);
 
     // Restore window geometry (position and size)
     QByteArray geometry = LastWindowState::windowGeometry();
