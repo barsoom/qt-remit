@@ -75,7 +75,7 @@ Building and installing on Linux is more straight forward, just copy and paste t
 This is for Ubuntu/Linux Mint/etc. If you're on a different distro that doesn't package Qt in a comparable way, check the Windows section above for how to install Qt from the online installer.
 
 ```bash
-sudo apt install build-essential cmake qt6-base-dev qt6-webengine-dev qt6-webchannel-dev && make && sudo make install
+sudo apt install -y build-essential cmake qt6-base-dev qt6-webengine-dev qt6-webchannel-dev && make && sudo make install
 
 # sudo make install PREFIX=/opt/qt-remit # on linux in a custom prefix
 ```
