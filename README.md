@@ -68,7 +68,7 @@ Drop that into your `/Applications` folder to have it available from your launch
 
 On Windows, the build steps produce a self-contained binary. Drop that wherever you want to execute it from and set up a link.
 
-## Building and installing on Linux
+## Build instructions for Linux
 
 Building and installing on Linux is more straight forward, just copy and paste the line below.
 
