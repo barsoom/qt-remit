@@ -22,7 +22,7 @@ Because the other two only work on macOS and one bold developer had to use Linux
 1. Open qt-remit again
 1. Go to the remit settings and click "Sign in with Github"
 
-## Build instructions
+## Build instructions for macOS and Windows
 
 ### Setup Dependencies
 You need
@@ -38,18 +38,6 @@ xcode-select --install # Installs the xcode tools, including git and a C++ compi
 brew install cmake
 brew install qt # Installs a full set of Qt libraries, including all of the ones qt-remit needs
 ```
-
-#### Ubuntu, with apt
-
-```bash
-sudo apt install build-essential cmake
-sudo apt install libqt6webenginewidgets6 # Should pull in everything else as dependencies
-```
-
-If you're on a different distro that doesn't package Qt in a comparable way, check the Windows section below for how to install Qt from the online installer.
-
-Report from joakimk:
-> On Linux with Qt 6.6.3 this worked: Custom Installation -> Qt -> 6.6.3 -> gcc, Qt WebEngine. Keep CMake in Build Tools. `sudo apt install libglx-dev libgl1-mesa-dev`. Then follow "Building qt-remit" below.
 
 #### Windows
 
@@ -67,13 +55,11 @@ Do a custom installation and make sure you install
 
 ### Building qt-remit
 
-1. Clone the repository
-1. Create a folder for the build output.
-1. `cmake -S path/to/qt-remit/ -O path/to/build/folder`
-1. `cd` into the build output folder
-1. `make`
+```bash
+make
+```
 
-This should generate a binary you can put somewhere on your path and run, as long as it can find a Qt6 that has the WebEngineWidgets installed.
+This should generate a binary at `build/qt-remit` that you can run, as long as it can find a Qt6 that has the WebEngineWidgets installed.
 
 ### Packaging qt-remit
 
@@ -81,6 +67,20 @@ On macOS, the build steps above produce an application package.
 Drop that into your `/Applications` folder to have it available from your launcher of choice.
 
 On Windows, the build steps produce a self-contained binary. Drop that wherever you want to execute it from and set up a link.
+
+## Building and installing on Linux
+
+Building and installing on Linux is more straight forward, just copy and paste the line below.
+
+This is for Ubuntu/Linux Mint/etc. If you're on a different distro that doesn't package Qt in a comparable way, check the Windows section above for how to install Qt from the online installer.
+
+```bash
+sudo apt install build-essential cmake qt6-base-dev qt6-webengine-dev qt6-webchannel-dev && make && sudo make install
+
+# sudo make install PREFIX=/opt/qt-remit # on linux in a custom prefix
+```
+
+You can use the icon in `resources/` when setting up a app launcher.
 
 ## Is it any good?
 
