@@ -20,7 +20,13 @@ This is for Ubuntu/Linux Mint/etc. If you're on a different distro that doesn't 
 You can use the icon in `resources/` when setting up a app launcher.
 
 ```bash
-sudo apt install -y build-essential cmake qt6-base-dev qt6-webengine-dev qt6-webchannel-dev && make && sudo make install
+sudo apt install -y build-essential cmake qt6-base-dev qt6-webengine-dev qt6-webchannel-dev && \
+if [ "$(basename "$PWD")" != "qt-remit" ]; then
+  [ -d qt-remit ] || git clone https://github.com/barsoom/qt-remit
+  cd qt-remit
+fi && \
+make && \
+sudo make install
 
 # sudo make install PREFIX=/opt/qt-remit # on linux in a custom prefix
 ```
