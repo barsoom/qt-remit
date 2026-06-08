@@ -27,6 +27,7 @@ set(SRC src)
 set(INC include)
 
 set(SOURCES
+    ${SRC}/browserpane.cpp
     ${SRC}/clipboardbridge.cpp
     ${SRC}/constants.cpp
     ${SRC}/githubview.cpp
@@ -40,6 +41,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    ${INC}/browserpane.h
     ${INC}/clipboardbridge.h
     ${INC}/constants.h
     ${INC}/githubview.h

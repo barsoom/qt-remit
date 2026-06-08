@@ -1,26 +1,34 @@
-#include <QWebEngineNavigationRequest>
 #include <QDesktopServices>
 #include <QCloseEvent>
 #include <QShowEvent>
+#include <QStandardPaths>
+#include <QWebEngineDownloadRequest>
+#include <QWebEnginePage>
+#include <QWebEngineProfile>
+
 #include "mainwindow.h"
+#include "browserpane.h"
 #include "constants.h"
 #include "lastwindowstate.h"
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidth(-1)
 {
-    splitter.addWidget(&remitView);
-    splitter.addWidget(&githubView);
+    remitView  = new RemitView(this);
+    githubView = new GithubView(this);
 
-    // Restore window geometry (position and size)
+    auto* remitPane  = new BrowserPane(remitView,  BrowserPane::Style::ProgressOnly, this);
+    auto* githubPane = new BrowserPane(githubView, BrowserPane::Style::ProgressOnly,   this);
+
+    splitter.addWidget(remitPane);
+    splitter.addWidget(githubPane);
+
     QByteArray geometry = LastWindowState::windowGeometry();
     if (!geometry.isEmpty()) {
         restoreGeometry(geometry);
     }
 
-    // Load saved splitter width (will be applied in showEvent)
     savedSplitterWidth = LastWindowState::splitterLeftWidth();
 
-    // Set default ratio for initial layout
     splitter.setStretchFactor(0, 1);
     splitter.setStretchFactor(1, 2);
 
@@ -28,37 +36,48 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidt
     setCentralWidget(&splitter);
 
     connect(
-        &remitView, &RemitView::githubNavigationRequested,
+        remitView, &RemitView::githubNavigationRequested,
         this, &MainWindow::openInGithubView
-        );
-
+    );
     connect(
-        &remitView, &RemitView::externalNavigationRequested,
+        remitView, &RemitView::externalNavigationRequested,
         this, &MainWindow::openInDefaultBrowser
-        );
-
+    );
     connect(
-        &githubView, &GithubView::externalNavigationRequested,
+        githubView, &GithubView::externalNavigationRequested,
         this, &MainWindow::openInDefaultBrowser
-        );
+    );
+    connect(
+        githubView->page(), &QWebEnginePage::titleChanged,
+        this, [this](const QString& t) { setWindowTitle(t.isEmpty() ? "Remit" : t); }
+    );
+    connect(
+        Constants::webProfile(), &QWebEngineProfile::downloadRequested,
+        this, &MainWindow::handleDownload
+    );
 }
 
 void MainWindow::connectSignals() {
 }
 
 void MainWindow::openInGithubView(const QUrl& url) {
-    if (url != githubView.url())
-        githubView.setUrl(url);
+    if (url != githubView->url())
+        githubView->setUrl(url);
 }
 
 void MainWindow::openInDefaultBrowser(const QUrl& url) {
     QDesktopServices::openUrl(url);
 }
 
+void MainWindow::handleDownload(QWebEngineDownloadRequest* download) {
+    download->setDownloadDirectory(
+        QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
+    download->accept();
+}
+
 void MainWindow::showEvent(QShowEvent* event) {
     QMainWindow::showEvent(event);
 
-    // Restore saved splitter width after window is shown
     if (savedSplitterWidth > 0) {
         int totalWidth = splitter.width();
         int rightWidth = totalWidth - savedSplitterWidth;
@@ -69,10 +88,8 @@ void MainWindow::showEvent(QShowEvent* event) {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-    // Save window geometry (position and size)
     LastWindowState::setWindowGeometry(saveGeometry());
 
-    // Save the width of the left column
     QList<int> sizes = splitter.sizes();
     if (!sizes.isEmpty()) {
         LastWindowState::setSplitterLeftWidth(sizes[0]);

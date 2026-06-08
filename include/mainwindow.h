@@ -7,6 +7,8 @@
 #include "remitview.h"
 #include "githubview.h"
 
+class QWebEngineDownloadRequest;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -20,8 +22,8 @@ protected:
 
 private:
     QSplitter splitter;
-    RemitView remitView;
-    GithubView githubView;
+    RemitView* remitView = nullptr;
+    GithubView* githubView = nullptr;
     int savedSplitterWidth;
 
     void connectSignals();
@@ -29,5 +31,6 @@ private:
 protected slots:
     void openInGithubView(const QUrl& url);
     void openInDefaultBrowser(const QUrl& url);
+    void handleDownload(QWebEngineDownloadRequest* download);
 };
 #endif // MAINWINDOW_H
