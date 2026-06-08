@@ -5,7 +5,7 @@ project(qt-remit VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets WebEngineWidgets WebChannel)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets WebEngineWidgets WebChannel Test)
 qt_standard_project_setup()
 
 set(CMAKE_AUTORCC ON)
@@ -37,6 +37,7 @@ set(SOURCES
     ${SRC}/remitview.cpp
     ${SRC}/settings.cpp
     ${SRC}/settingsdialog.cpp
+    ${SRC}/urlrouter.cpp
     resources/resources.qrc
 )
 
@@ -50,6 +51,7 @@ set(HEADERS
     ${INC}/remitview.h
     ${INC}/settings.h
     ${INC}/settingsdialog.h
+    ${INC}/urlrouter.h
 )
 
 target_sources(qt-remit PRIVATE ${SOURCES} ${HEADERS})
@@ -76,3 +78,15 @@ if(MSVC)
   # This definition suppresses LSP warnings related to that.
   target_compile_definitions(qt-remit PRIVATE __clang_major__=18)
 endif()
+
+# Tests — no WebEngine dependency, so no display server required
+enable_testing()
+add_executable(qt-remit-tests)
+target_sources(qt-remit-tests PRIVATE
+    ${SRC}/urlrouter.cpp
+    ${INC}/urlrouter.h
+    tests/test_urlrouter.cpp
+)
+target_include_directories(qt-remit-tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(qt-remit-tests PRIVATE Qt6::Core Qt6::Test)
+add_test(NAME qt-remit-tests COMMAND qt-remit-tests)

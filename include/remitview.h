@@ -2,6 +2,7 @@
 #define REMITVIEW_H
 
 #include <QWebEngineView>
+#include "urlrouter.h"
 
 class RemitView : public QWebEngineView
 {
@@ -14,7 +15,7 @@ signals:
     void externalNavigationRequested(const QUrl& url);
 
 private:
-    bool loggingIn;
+    UrlRouter router_;
     bool handleUrlAndEmitSignals(const QUrl& url);
 
 private slots:

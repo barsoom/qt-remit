@@ -7,3 +7,6 @@ all: build/qt-remit
 
 install: build/qt-remit
 	install -D -m 755 build/qt-remit $(PREFIX)/bin/qt-remit
+
+test: build/qt-remit
+	cd build && ctest --output-on-failure
