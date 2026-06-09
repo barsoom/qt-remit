@@ -8,6 +8,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets WebEngineWidgets WebChannel Test)
 qt_standard_project_setup()
 
+# Qt 6.9's FindWrapOpenGL.cmake unconditionally links the legacy AGL.framework on macOS. AGL still exists on the live filesystem (so CMake's find_library succeeds) but was removed from the macOS 26 SDK that the linker actually links against, causing "ld: framework 'AGL' not found". AGL has been unused since macOS 10.9, so we strip it from the interface.
+if(APPLE AND TARGET WrapOpenGL::WrapOpenGL)
+    get_target_property(_wrapopengl_libs WrapOpenGL::WrapOpenGL INTERFACE_LINK_LIBRARIES)
+    if(_wrapopengl_libs)
+        list(FILTER _wrapopengl_libs EXCLUDE REGEX "AGL")
+        set_target_properties(WrapOpenGL::WrapOpenGL PROPERTIES INTERFACE_LINK_LIBRARIES "${_wrapopengl_libs}")
+    endif()
+endif()
+
 set(CMAKE_AUTORCC ON)
 
 add_executable(qt-remit)
