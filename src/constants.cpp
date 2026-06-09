@@ -18,6 +18,7 @@ QWebEngineProfile* Constants::webProfile() {
 
     if(!configured) {
         profile.setPersistentCookiesPolicy(QWebEngineProfile::AllowPersistentCookies);
+        profile.setHttpCacheMaximumSize(50 * 1024 * 1024); // 50 MB
         configured = true;
     }
 

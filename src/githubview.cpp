@@ -34,7 +34,7 @@ void GithubView::setupClipboardBridge() {
         loadWebChannel.setName("QWebChannel");
         loadWebChannel.setWorldId(QWebEngineScript::MainWorld);
         loadWebChannel.setInjectionPoint(QWebEngineScript::DocumentCreation);
-        loadWebChannel.setRunsOnSubFrames(true);
+        loadWebChannel.setRunsOnSubFrames(false);
         page()->scripts().insert(loadWebChannel);
         webChannelFile.close();
     }
@@ -93,7 +93,7 @@ void GithubView::setupClipboardBridge() {
     webChannelScript.setName("ClipboardBridge");
     webChannelScript.setWorldId(QWebEngineScript::MainWorld);
     webChannelScript.setInjectionPoint(QWebEngineScript::DocumentCreation);
-    webChannelScript.setRunsOnSubFrames(true);
+    webChannelScript.setRunsOnSubFrames(false);
     page()->scripts().insert(webChannelScript);
 }
 
