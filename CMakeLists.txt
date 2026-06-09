@@ -39,6 +39,7 @@ set(SOURCES
     ${SRC}/browserpane.cpp
     ${SRC}/clipboardbridge.cpp
     ${SRC}/constants.cpp
+    ${SRC}/findbaricons.cpp
     ${SRC}/githubview.cpp
     ${SRC}/lastwindowstate.cpp
     ${SRC}/main.cpp
@@ -54,6 +55,7 @@ set(HEADERS
     ${INC}/browserpane.h
     ${INC}/clipboardbridge.h
     ${INC}/constants.h
+    ${INC}/findbaricons.h
     ${INC}/githubview.h
     ${INC}/lastwindowstate.h
     ${INC}/mainwindow.h

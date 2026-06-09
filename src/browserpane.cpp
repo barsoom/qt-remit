@@ -1,9 +1,12 @@
 #include "browserpane.h"
 
+#include "findbaricons.h"
+
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QProgressBar>
+#include <QSize>
 #include <QResizeEvent>
 #include <QShortcut>
 #include <QToolButton>
@@ -71,29 +74,59 @@ BrowserPane::BrowserPane(QWebEngineView* view, Style style, QWidget* parent)
 
     // Find bar (hidden by default, shown with Ctrl+F)
     m_findBar = new QWidget(this);
+    m_findBar->setObjectName("findBar");
+    m_findBar->setStyleSheet(
+        "#findBar { background: palette(window); "
+        "border-top: 1px solid palette(mid); } "
+        "#findBar QToolButton { "
+        "  border: none; background: transparent; "
+        "  padding: 2px 6px; border-radius: 3px; "
+        "} "
+        "#findBar QToolButton:hover { background: palette(midlight); } "
+        "#findBar QToolButton:pressed { background: palette(mid); }"
+    );
     auto* fl = new QHBoxLayout(m_findBar);
-    fl->setContentsMargins(4, 2, 4, 2);
+    fl->setContentsMargins(8, 4, 6, 4);
+    fl->setSpacing(2);
 
-    auto* closeBtn = new QToolButton;
-    closeBtn->setText("\xc3\x97"); // ×
     m_findInput = new QLineEdit;
-    m_findInput->setPlaceholderText("Find in page...");
-    m_findInput->setMaximumWidth(220);
-    auto* prevBtn = new QToolButton;
-    prevBtn->setText("\xe2\x96\xb2"); // ▲
-    prevBtn->setToolTip("Previous match (Shift+Enter)");
-    auto* nextBtn = new QToolButton;
-    nextBtn->setText("\xe2\x96\xbc"); // ▼
-    nextBtn->setToolTip("Next match (Enter)");
+    m_findInput->setPlaceholderText("Find in page");
+    m_findInput->setClearButtonEnabled(true);
+    m_findInput->setMaximumWidth(280);
+
+    auto makeFlatButton = [this](const QIcon& icon, const QString& tip) {
+        auto* btn = new QToolButton;
+        btn->setIcon(icon);
+        btn->setToolTip(tip);
+        btn->setAutoRaise(true);
+        btn->setFocusPolicy(Qt::NoFocus);
+        btn->setIconSize(QSize(14, 14));
+        return btn;
+    };
+
+    const QPalette pal = palette();
+    auto* prevBtn = makeFlatButton(FindBarIcons::chevronUp(pal),
+                                   "Previous match (Shift+Enter)");
+    auto* nextBtn = makeFlatButton(FindBarIcons::chevronDown(pal),
+                                   "Next match (Enter)");
+    auto* closeBtn = makeFlatButton(FindBarIcons::close(pal),
+                                    "Close (Esc)");
+
     m_findCount = new QLabel;
     m_findCount->setMinimumWidth(60);
+    {
+        QPalette countPal = m_findCount->palette();
+        countPal.setColor(QPalette::WindowText,
+                          countPal.color(QPalette::Disabled, QPalette::WindowText));
+        m_findCount->setPalette(countPal);
+    }
 
-    fl->addWidget(closeBtn);
     fl->addWidget(m_findInput);
     fl->addWidget(prevBtn);
     fl->addWidget(nextBtn);
     fl->addWidget(m_findCount);
     fl->addStretch();
+    fl->addWidget(closeBtn);
     m_findBar->hide();
     layout->addWidget(m_findBar);
 
