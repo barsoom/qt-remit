@@ -60,6 +60,7 @@ target_include_directories(qt-remit PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(qt-remit PRIVATE Qt6::Widgets Qt6::WebEngineWidgets Qt6::WebChannel)
 
 if(APPLE)
+    set(MACOSX_BUNDLE_BUNDLE_NAME "Qt-Remit")
     set(MACOSX_BUNDLE_ICON_FILE qt-remit.icns)
     set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/resources/qt-remit.icns")
     set_source_files_properties(${app_icon_macos} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
