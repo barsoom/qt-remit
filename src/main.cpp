@@ -7,6 +7,8 @@
 
 int main(int argc, char *argv[])
 {
+    qputenv("QTWEBENGINE_CHROMIUM_FLAGS", "--disable-features=BackForwardCache");
+
     QApplication a(argc, argv);
 
     // Show settings dialog if not configured
