@@ -33,7 +33,7 @@ sudo make install
 
 ## Build instructions for macOS and Windows
 
-### Setup Dependencies
+### Set up dependencies
 You need
 - A C++ compiler
 - CMake
