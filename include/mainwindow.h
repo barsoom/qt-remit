@@ -27,6 +27,7 @@ private:
     int savedSplitterWidth;
 
     void connectSignals();
+    void buildInitialWindowSizeAndPosition();
 
 protected slots:
     void openInGithubView(const QUrl& url);

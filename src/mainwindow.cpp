@@ -27,16 +27,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidt
 
     QByteArray geometry = LastWindowState::windowGeometry();
     if (geometry.isEmpty()) {
-        // No saved geometry on first boot, so start at a comfortable side-by-side size, capped to fit (and centered on) smaller displays. Prefer the screen under the cursor (the one the user is on) and fall back to the primary screen.
-        QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
-        if (!screen) {
-            screen = QGuiApplication::primaryScreen();
-        }
-        QRect available = screen->availableGeometry();
-        int width  = qMin(1280, static_cast<int>(available.width()  * 0.9));
-        int height = qMin(800,  static_cast<int>(available.height() * 0.9));
-        resize(width, height);
-        move(available.center() - QPoint(width / 2, height / 2));
+        buildInitialWindowSizeAndPosition();
     } else {
         restoreGeometry(geometry);
     }
@@ -72,6 +63,19 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), savedSplitterWidt
 }
 
 void MainWindow::connectSignals() {
+}
+
+void MainWindow::buildInitialWindowSizeAndPosition() {
+    // Comfortable side-by-side size, capped to fit (and centered on) smaller displays. Prefer the screen under the cursor (the one the user is on) and fall back to the primary screen.
+    QScreen* screen = QGuiApplication::screenAt(QCursor::pos());
+    if (!screen) {
+        screen = QGuiApplication::primaryScreen();
+    }
+    QRect available = screen->availableGeometry();
+    int width  = qMin(1280, static_cast<int>(available.width()  * 0.9));
+    int height = qMin(800,  static_cast<int>(available.height() * 0.9));
+    resize(width, height);
+    move(available.center() - QPoint(width / 2, height / 2));
 }
 
 void MainWindow::openInGithubView(const QUrl& url) {
