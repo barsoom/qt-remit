@@ -1,4 +1,5 @@
 #include "remitview.h"
+#include "clipboardbridge.h"
 #include "constants.h"
 #include "settings.h"
 
@@ -11,6 +12,8 @@ RemitView::RemitView(QWidget* parent):
 {
     connect(page(), &QWebEnginePage::navigationRequested, this, &RemitView::handleNavigationRequest);
     connect(page(), &QWebEnginePage::newWindowRequested, this, &RemitView::handleNewWindowRequest);
+
+    ClipboardBridge::install(this);
 
     page()->load(Settings::remitUrl());
 }
